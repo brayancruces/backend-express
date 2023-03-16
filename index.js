@@ -2,6 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express(); 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs/swagger.js');
+
+const swaggerJsdoc = require("swagger-jsdoc");
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -14,28 +20,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // database
 const db = require("./models");
-//const Role = db.role;
-db.sequelize.sync();
+db.sequelize.sync(); 
+//initialValues();
 
-// force: true will drop the table if it already exists
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync Database with { force: true }');
-//   initial();
-// });
 
-// simple route
+// Ruta principal
 app.get("/", (req, res) => {
   res.json({ message: "MarketLogic API esta lista" });
 });
 
-
-// routes
-//require('./app/routes/auth.routes')(app);
+// Rutas anexas
+require('./routes/auth.routes')(app);
 //require('./app/routes/user.routes')(app);
 //require('./app/routes/property.routes')(app); 
 
 
-// set port, listen for requests
+// Puerto
 const PORT = process.env.PORT || 8080; 
 
 
@@ -44,13 +44,42 @@ app.listen(PORT, () => {
 }); 
 
 
-function initial() {
-  Role.create({
-    id: 1,
-    name: "user"
+
+/**
+ * DATA DE PRUEBA (SOLO EN TEST)
+ */
+function initialValues() {
+  db.User.create({
+    firstName: "Brayan", 
+    lastName: "Cruces", 
+    email: "admin@gmail.com",
+    password: '123456789',
+    rol: 'admin'
   });
-  Role.create({
-    id: 2,
-    name: "admin"
+
+  db.User.create({
+    firstName: "Juan", 
+    lastName: "Cruces", 
+    email: "usuario@gmail.com",
+    password: '123456789',
+    rol: 'user'
   });
-}
+
+
+  db.Category.create({
+    //id:1,
+    name: 'Tecnologia', 
+  });
+
+  db.Category.create({
+    //id:2,
+    name: 'Escolar', 
+  });
+
+  db.Category.create({
+    //id:3,
+    name: 'Belleza', 
+  });
+
+} 
+

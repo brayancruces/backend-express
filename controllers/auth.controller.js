@@ -2,10 +2,23 @@ const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const config = require("../config/auth.config");
+const config = require("../config/auth.config.js");
 
 
-exports.signin = (req, res) => {
+exports.signin = (req, res) => { 
+    
+
+     // Validaciones
+    if(!req.body.email) {
+      return res.status(404).send({ message: "Email vacio" });
+    }
+
+    if(!req.body.password) {
+      return res.status(404).send({ message: "Es necesaria la contrasea" });
+    } 
+
+    // Busqueda
+
     User.findOne({
       where: {
         email: req.body.email
@@ -15,11 +28,14 @@ exports.signin = (req, res) => {
         if (!user) {
           return res.status(404).send({ message: "Usuario no encontrado" });
         }
-  
+         
+        console.log(user.pass)
         var passwordIsValid = bcrypt.compareSync(
           req.body.password,
           user.password
         );
+
+        console.log(passwordIsValid)
   
         if (!passwordIsValid) {
           return res.status(401).send({
@@ -29,7 +45,7 @@ exports.signin = (req, res) => {
         }
         
         // Generar JWT
-        var token = jwt.sign({ id: user.id }, config.secret, {
+        var token = jwt.sign({ id: user.id }, config.secretJWT, {
           expiresIn: 86400 // 24 horas
         });
   
@@ -43,7 +59,7 @@ exports.signin = (req, res) => {
             id: user.id,
             email: user.email,
             roles: authorities,
-            accessToken: token
+            jwt: token
         });
 
 
