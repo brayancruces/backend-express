@@ -12,19 +12,21 @@ Consideraciones:
 
 - Solo los administradores pueden crear, actualizar y eliminar productos. 
 
+## Configuración 
 
-# Configuración 
-
-Existe una configuración previa antes de correr el proyecto. En config.json editar con los datos necesarios. 
-
-
-# Despliegue 
-
-Se ha desplegado este backend en la siguiente URL: 
+Existe una configuración previa antes de correr el proyecto. En config.json editar con los datos necesarios de base de datos. 
 
 
+## Despliegue 
 
-# Swagger 
+Se ha desplegado este backend en la siguiente URL base en la nube: 
+
+https://shark-app-nfufp.ondigitalocean.app/
+
+## Swagger 
 
 
-Link del Swagger para mayor detalle de la REST API. 
+Link del Swagger para mayor detalle de la REST API.  
+
+https://shark-app-nfufp.ondigitalocean.app/api-docs/ 
+

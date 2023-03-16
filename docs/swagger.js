@@ -13,7 +13,7 @@ module.exports = {
         },
         servers: [
           {
-            url: "http://localhost:80",
+            url: "https://shark-app-nfufp.ondigitalocean.app/",
           },
         ],
       },
