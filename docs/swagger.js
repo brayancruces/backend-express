@@ -4,13 +4,23 @@ module.exports = {
         info: {
             title: "Backend MyMarketLogic", 
             description: "Esta es una prueba de backend.", 
-            version: "1.0.0", // version number
+            version: "1.0.0", 
             contact: {
-              name: "Brayan Cruces", // your name
-              email: "brayan2259@gmail.com", // your email
-              url: "brayancru.com", // your website
+              name: "Brayan Cruces", 
+              email: "brayan2259@gmail.com", 
+              url: "brayancru.com", 
             },
         },
+        securityDefinitions: {
+            ApiKeyAuth: {
+                type: 'apiKey',
+                in: 'header',
+                name: 'X-API-Key'
+            }
+
+
+        },
+  
         servers: [
           {
             url: "https://shark-app-nfufp.ondigitalocean.app/",

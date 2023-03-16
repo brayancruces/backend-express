@@ -38,6 +38,8 @@
  *   get:
  *     summary: Listar todos los productos
  *     tags: [Productos]
+ *     security: 
+ *       - apiKey: []
  *     responses:
  *       200:
  *         description: La lista de los productos
