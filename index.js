@@ -7,7 +7,13 @@ const swaggerDocument = require('./docs/swagger.js');
 
 const swaggerJsdoc = require("swagger-jsdoc");
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+const specs = swaggerJsdoc(swaggerDocument);
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs)
+);
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -21,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // database
 const db = require("./models");
 db.sequelize.sync(); 
-//initialValues();
+initialValues();
 
 
 // Ruta principal
@@ -31,12 +37,11 @@ app.get("/", (req, res) => {
 
 // Rutas anexas
 require('./routes/auth.routes')(app);
-//require('./app/routes/user.routes')(app);
-//require('./app/routes/property.routes')(app); 
+//require('./app/routes/products.routes')(app); 
 
 
 // Puerto
-const PORT = process.env.PORT || 8080; 
+const PORT = process.env.PORT || 3000; 
 
 
 app.listen(PORT, () => {
