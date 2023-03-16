@@ -130,7 +130,7 @@
  *         description: El producto no fue encontrado
  */
 
-const { authJwt } = require("../middleware");
+const { authJwt } = require("../middlewares");
 
 const products = require("../controllers/products.controller");
 
@@ -142,9 +142,8 @@ module.exports = function(app) {
         );
         next();
       });
-      app.get("/api/products/", [authJwt.verifyToken], properties.findAll);
+      app.get("/api/products/", [authJwt.verifyToken], products.findAll);
       app.post("/api/products/", [authJwt.verifyToken, authJwt.isAdmin], products.create);
-      app.get("/api/products/", [authJwt.verifyToken, authJwt.isAdmin], products.findAll);  
       app.get("/api/products/:id", [authJwt.verifyToken], products.findOne);
       app.put("/api/products/:id", [authJwt.verifyToken, authJwt.isAdmin], products.update);
       app.delete("/api/products/:id", [authJwt.verifyToken, authJwt.isAdmin], products.delete);

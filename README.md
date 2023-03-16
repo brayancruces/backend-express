@@ -14,8 +14,18 @@ Consideraciones:
 
 ## Configuración 
 
-Existe una configuración previa antes de correr el proyecto. En config.json editar con los datos necesarios de base de datos. 
+Existe una configuración previa antes de correr el proyecto. En config.json editar con los datos necesarios de base de datos.  
 
+
+## Instalación 
+
+Primero ejecutar el siguiente comando para instalar todas las dependencias: 
+
+    npm install 
+
+Luego, para correr el servicio: 
+
+    node index.js
 
 ## Despliegue 
 

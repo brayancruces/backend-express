@@ -13,9 +13,9 @@ exports.create = (req, res) => {
     return;
   }
 
-  if (!req.body.price || req.body.price > 0) {
+  if (!req.body.price || req.body.price <= 0) {
     res.status(400).send({
-      message: "El precio no puedo estar vacio y debe ser mayor a 0"
+      message: "El precio no puede estar vacio y debe ser mayor a 0"
     });
     return;
   } 
@@ -41,7 +41,7 @@ exports.create = (req, res) => {
         description: req.body.description,
         CategoryId: req.body.CategoryId
       };
-      // Save Property in the database
+
       Product.create(product)
         .then(data => {
           res.send(data);
@@ -141,7 +141,7 @@ exports.delete = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
-  Property.destroy({
+  Product.destroy({
     where: {},
     truncate: false
   })

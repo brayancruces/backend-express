@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 
 // Rutas anexas
 require('./routes/auth.routes')(app);
-//require('./app/routes/products.routes')(app); 
+require('./routes/products.routes')(app); 
 
 
 // Puerto
